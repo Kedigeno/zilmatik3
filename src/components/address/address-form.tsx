@@ -1,11 +1,12 @@
+
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import type { Address } from '@/lib/types';
 import { Button } from "@/components/ui/button";
-import { Form as RHFForm, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
@@ -68,7 +69,7 @@ export default function AddressForm({ onAddAddress, initialData, onUpdateAddress
   };
 
   return (
-    <RHFForm {...form}>
+    <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 p-1">
         <FormField
           control={form.control}
@@ -121,7 +122,7 @@ export default function AddressForm({ onAddAddress, initialData, onUpdateAddress
               <FormControl>
                 <Textarea placeholder="Örn: Cumhuriyet Mah. Atatürk Cad. No:12 D:5, Çankaya/Ankara" {...field} className="text-base min-h-[100px]" />
               </FormControl>
-              <FormDescription>Google Haritalar'da navigasyon için kullanılacak tam adres.</FormMessage />
+              <FormDescription>Google Haritalar'da navigasyon için kullanılacak tam adres.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -131,6 +132,6 @@ export default function AddressForm({ onAddAddress, initialData, onUpdateAddress
           {addressIdToUpdate ? "Adresi Güncelle" : "Adresi Kaydet"}
         </Button>
       </form>
-    </RHFForm>
+    </FormProvider>
   );
 }
