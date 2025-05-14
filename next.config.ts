@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  // Statik dışa aktarma için output ayarı eklendi.
+  output: 'export',
   images: {
     remotePatterns: [
       {
@@ -16,6 +18,10 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
+    // Statik dışa aktarmada 'next/image' optimizasyonunu devre dışı bırakmak için eklendi.
+    // Bu, harici görsellerin derleme sırasında sorun çıkarmasını engeller.
+    // Gelişmiş görsel optimizasyonu için alternatif çözümler (örn: bulut tabanlı optimizasyon) gerekebilir.
+    unoptimized: true,
   },
 };
 

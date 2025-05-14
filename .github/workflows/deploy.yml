@@ -1,0 +1,44 @@
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Veya varsayılan branch'iniz neyse onu kullanın
+  workflow_dispatch: # Manuel olarak çalıştırma seçeneği
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # package.json'daki Node sürümünüzle eşleşmeli
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Next.js app
+        run: npm run build # Bu komut, next.config.js'deki 'output: "export"' ayarı sayesinde statik dosyaları 'out' klasörüne çıkaracaktır
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out # Next.js'in statik dosyaları dışa aktardığı varsayılan klasör
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
