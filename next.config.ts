@@ -7,8 +7,6 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Statik dışa aktarma için output ayarı eklendi.
-  output: 'export',
   images: {
     remotePatterns: [
       {
