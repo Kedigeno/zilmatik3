@@ -16,7 +16,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '14' # Node.js sürümünüzü ayarlayın
+        node-version: '22' # Node.js sürümünü 22 olarak ayarlayın
 
     - name: Install dependencies
       run: npm install # Veya projeniz için uygun olan paket yöneticisini kullanın (yarn, pnpm vb.)
